@@ -1,11 +1,11 @@
-📦 Pharmacy Price & Availability Checker API
+ ### Pharmacy Price & Availability Checker API
 
 This is the backend API for the Pharmacy Price & Availability Checker project.
 It is built with Django + Django REST Framework and provides APIs for a React frontend.
 
 The system allows patients to search medicines, compare prices, and check real-time stock availability across pharmacies in Uganda.
 
-🚀 Features
+ ### Features
 
 User management (Patients, Pharmacists, Admins)
 
@@ -15,7 +15,7 @@ Price & availability checking
 
 RESTful API endpoints for frontend consumption
 
-🛠️ Tech Stack
+ ### Tech Stack
 
 Backend: Django, Django REST Framework
 
