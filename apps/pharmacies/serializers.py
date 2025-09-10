@@ -1,14 +1,22 @@
+# your_app/serializers.py
+
 from rest_framework import serializers
 from .models import Pharmacy, Medicine
 
-class MedicineSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Medicine
-        fields = '__all__'
+# Assuming you have a UserSerializer like the one from our previous discussions
+from django.contrib.auth import get_user_model
 
 class PharmacySerializer(serializers.ModelSerializer):
-    medicines = MedicineSerializer(many=True, read_only=True)
-
     class Meta:
         model = Pharmacy
-        fields = ['id', 'name', 'address', 'medicines']
+        fields = '__all__'
+
+class MedicineSerializer(serializers.ModelSerializer):
+    # This makes the API response more readable by showing the username
+    # instead of just the user's ID.
+    owner = serializers.ReadOnlyField(source='owner.username')
+
+    class Meta:
+        model = Medicine
+        # Add 'owner' to the list of fields
+        fields = ['id', 'name', 'description', 'price', 'pharmacy', 'owner']

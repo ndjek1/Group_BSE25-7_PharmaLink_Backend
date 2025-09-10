@@ -22,10 +22,26 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'django-insecure-4cd#c*x@gxie$g&u)hl)8l5h+6n$i-opafrf3%$)2wiaorq6pm'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+IS_RENDER = 'RENDER' in os.environ
 
+if IS_RENDER:
+    DEBUG = False
+else:
+    DEBUG = True # Keep True for local development
+
+
+# Allowed hosts configuration
 ALLOWED_HOSTS = []
+
+if IS_RENDER:
+    # Get the hostname from the RENDER_EXTERNAL_HOSTNAME environment variable
+    # provided by Render. Your service will not start without this.
+    RENDER_EXTERNAL_HOSTNAME = os.environ.get('RENDER_EXTERNAL_HOSTNAME')
+    if RENDER_EXTERNAL_HOSTNAME:
+        ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+
+# It's also good practice to allow localhost for local development
+ALLOWED_HOSTS.append('127.0.0.1')
 
 
 # Application definition
@@ -39,12 +55,16 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
 
      'rest_framework',
+       'rest_framework_simplejwt',
     'apps.users',
     'apps.pharmacies',
 ]
 
+AUTH_USER_MODEL = "users.User"
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -77,12 +97,12 @@ WSGI_APPLICATION = 'pharmacy_project.wsgi.application'
 # https://docs.djangoproject.com/en/5.2/ref/settings/#databases
 
 DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+    'default': dj_database_url.config(
+        # Fallback to a local SQLite database if DATABASE_URL is not set
+        default='sqlite:///db.sqlite3',
+        conn_max_age=600 # Recommended for persistent connections
+    )
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/5.2/ref/settings/#auth-password-validators
@@ -118,9 +138,19 @@ USE_TZ = True
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
-STATIC_URL = 'static/'
+STATIC_URL = '/static/'
+# This tells Django to copy all static files into a single 'staticfiles' directory during deployment.
+STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
+# Tell Django to use Whitenoise to serve static files
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework_simplejwt.authentication.JWTAuthentication',
+    )
+}
