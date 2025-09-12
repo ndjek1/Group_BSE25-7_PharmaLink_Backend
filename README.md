@@ -32,7 +32,7 @@ This section provides instructions for frontend developers on how to interact wi
 ### Base URL
 All endpoints are relative to the base URL:
 
-Live Server: [https://your-app-name.onrender.com](https://pharmalink-x7j6.onrender.com)
+Live Server: [Pharmalink](https://pharmalink-x7j6.onrender.com)
 
 ---
 
@@ -56,8 +56,10 @@ Authorization: Bearer <your_access_token>
 **Request Body:**
 ```json
 {
-  "username": "new_react_user",
-  "password": "a-strong-password123"
+    "username": "liveuser",
+    "email": "victoire@example.com",
+    "is_pharmacist": true,
+    "password": "aVerySecurePassword123!"
 }
 ```
 Success Response (201 Created):
