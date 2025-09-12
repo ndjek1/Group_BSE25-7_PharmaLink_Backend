@@ -32,11 +32,7 @@ This section provides instructions for frontend developers on how to interact wi
 ### Base URL
 All endpoints are relative to the base URL:
 
-Live Server: https://your-app-name.onrender.com
-
-pgsql
-Copy code
-> Replace `your-app-name` with the actual app name from your Render dashboard.
+Live Server: [https://your-app-name.onrender.com](https://pharmalink-x7j6.onrender.com)
 
 ---
 
@@ -49,10 +45,6 @@ The API uses **JWT (JSON Web Tokens)** for authentication.
 
 **Header format:**
 Authorization: Bearer <your_access_token>
-
-yaml
-Copy code
-
 ---
 
 ### 👤 Authentication Workflow
