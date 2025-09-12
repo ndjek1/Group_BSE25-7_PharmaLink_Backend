@@ -10,7 +10,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = os.environ.get('SECRET_KEY')
+SECRET_KEY = os.environ.get('SECRET_KEY') or "django-insecure-default-key"
 
 IS_RENDER = 'RENDER' in os.environ
 
@@ -68,7 +68,7 @@ ROOT_URLCONF = 'pharmacy_project.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+           'DIRS': [BASE_DIR / 'apps' / 'pharmacies' / 'templates'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [

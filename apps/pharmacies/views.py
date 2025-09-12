@@ -6,6 +6,8 @@ from rest_framework import viewsets, permissions
 # from django.contrib.auth import get_user_model
 from .models import Pharmacy, Medicine
 from .serializers import PharmacySerializer, MedicineSerializer
+from django.shortcuts import render
+
 
 # User = get_user_model() # No longer needed here
 
@@ -43,3 +45,6 @@ class MedicineViewSet(viewsets.ModelViewSet):
         currently authenticated user.
         """
         return Medicine.objects.filter(owner=self.request.user)
+
+def index(request):
+    return render(request, "index.html")

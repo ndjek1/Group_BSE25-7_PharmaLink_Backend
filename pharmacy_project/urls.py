@@ -2,6 +2,8 @@
 
 from django.contrib import admin
 from django.urls import path, include
+from apps.pharmacies.views import index 
+
 from rest_framework_simplejwt.views import (
     TokenObtainPairView,
     TokenRefreshView,
@@ -9,6 +11,7 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+      path('', index, name='index'),
     
     # App URLs
     path('api/', include('apps.pharmacies.urls')), 

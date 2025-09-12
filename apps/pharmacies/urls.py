@@ -1,5 +1,6 @@
 from django.urls import path
-from .views import MedicineViewSet, PharmacyViewSet
+from .views import MedicineViewSet, PharmacyViewSet, index
+
 
 # --- Manual URL configuration for Medicines ---
 
