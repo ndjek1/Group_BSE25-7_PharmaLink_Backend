@@ -48,6 +48,7 @@ INSTALLED_APPS = [
        'rest_framework_simplejwt',
     'apps.users',
     'apps.pharmacies',
+    'corsheaders',
 ]
 
 AUTH_USER_MODEL = "users.User"
@@ -61,6 +62,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
 ]
 
 ROOT_URLCONF = 'pharmacy_project.urls'
@@ -144,3 +146,7 @@ REST_FRAMEWORK = {
         'rest_framework_simplejwt.authentication.JWTAuthentication',
     )
 }
+
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
