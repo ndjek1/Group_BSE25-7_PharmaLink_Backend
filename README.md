@@ -156,3 +156,21 @@ Error Responses:
 401 Unauthorized: Missing or invalid/expired token.
 
 400 Bad Request: Invalid data (e.g., missing required field, pharmacy ID does not exist).
+
+## Continuous Integration (CI) and Code Quality
+
+This project uses GitHub Actions for CI. The pipeline is defined in `.github/workflows/ci.yml`.
+
+### What the CI Pipeline Does:
+- Runs on every push and pull request to the `main` branch.
+- Executes three checks in parallel:
+  1. **Backend Tests:** Runs Django unit tests.
+  2. **Frontend Tests:** Runs React tests and builds the project.
+  3. **Linting:** Runs `flake8` for Python code and `ESLint` for JavaScript code.
+
+### Running Linters Locally:
+**Backend (Python with flake8):**
+```bash
+cd backend
+pip install -r requirements.txt
+flake8 . --config=.flake8
