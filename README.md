@@ -147,7 +147,6 @@ Success Response (201 Created):
   "name": "Ibuprofen 200mg",
   "description": "Relieves pain and reduces inflammation.",
   "price": "9.99",
-  "pharmacy": 1,
   "owner": "new_react_user"
 }
 ```
