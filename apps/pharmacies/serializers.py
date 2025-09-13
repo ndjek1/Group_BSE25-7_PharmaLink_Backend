@@ -19,4 +19,4 @@ class MedicineSerializer(serializers.ModelSerializer):
     class Meta:
         model = Medicine
         # Add 'owner' to the list of fields
-        fields = ['id', 'name', 'description', 'price', 'pharmacy', 'owner']
+        fields = ['id', 'name', 'description', 'price', 'owner']
