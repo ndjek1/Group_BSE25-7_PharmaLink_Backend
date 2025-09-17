@@ -11,7 +11,7 @@ from rest_framework_simplejwt.views import (
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-      path('', index, name='index'),
+    path('', index, name='index'),
     
     # App URLs
     path('api/', include('apps.pharmacies.urls')), 
