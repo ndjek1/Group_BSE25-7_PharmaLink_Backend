@@ -70,26 +70,27 @@ jobs:
       env:
         DATABASE_URL: postgresql://postgres:postgres@localhost:5432/test_pharmalink
 
-  deploy-staging:
-    name: Deploy to Staging
-    needs: test
-    runs-on: ubuntu-latest
-    if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
+  # --- Staging job is temporarily disabled until you create the staging service on Render ---
+  # deploy-staging:
+  #   name: Deploy to Staging
+  #   needs: test
+  #   runs-on: ubuntu-latest
+  #   if: github.ref == 'refs/heads/develop' && github.event_name == 'push'
     
-    steps:
-    - name: Checkout code
-      uses: actions/checkout@v4
+  #   steps:
+  #   - name: Checkout code
+  #     uses: actions/checkout@v4
       
-    - name: Deploy to Render Staging
-      uses: johnbeynon/render-deploy-action@v0.0.8
-      with:
-        service-id: ${{ secrets.RENDER_STAGING_SERVICE_ID }}
-        api-key: ${{ secrets.RENDER_API_KEY }}
+  #   - name: Deploy to Render Staging
+  #     uses: johnbeynon/render-deploy-action@v0.0.8
+  #     with:
+  #       service-id: ${{ secrets.RENDER_STAGING_SERVICE_ID }}
+  #       api-key: ${{ secrets.RENDER_API_KEY }}
         
-    - name: Verify staging deployment
-      run: |
-        echo "Staging deployment completed successfully"
-        echo "Staging URL: https://pharmalink-backend-staging.onrender.com"
+  #   - name: Verify staging deployment
+  #     run: |
+  #       echo "Staging deployment completed successfully"
+  #       echo "Staging URL: https://pharmalink-backend-staging.onrender.com"
 
   deploy-production:
     name: Deploy to Production
