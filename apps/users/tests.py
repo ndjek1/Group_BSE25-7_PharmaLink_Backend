@@ -63,3 +63,8 @@ class UserAPITest(APITestCase):
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertIn('access', response.data)
         self.assertIn('refresh', response.data)
+
+        def test_pipeline_failure_demo(self):
+    """This test will fail to demonstrate pipeline failure"""
+    # This test will always fail to prove the pipeline works
+    self.assertEqual(1, 2, "This test intentionally fails to prove pipeline failure")
